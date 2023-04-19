@@ -1,0 +1,7 @@
+﻿  Queue.c
+D:\数据结构\Queue\Queue\Queue.c(18,1): warning C4133: “初始化”: 从“Queue *”到“QNode *”的类型不兼容
+D:\数据结构\Queue\Queue\Queue.c(45,27): warning C4133: “=”: 从“QNode *”到“Queue *”的类型不兼容
+D:\数据结构\Queue\Queue\Queue.c(46,28): warning C4133: “=”: 从“Queue *”到“QNode *”的类型不兼容
+D:\数据结构\Queue\Queue\Queue.c(55,1): warning C4133: “初始化”: 从“Queue *”到“QNode *”的类型不兼容
+D:\数据结构\Queue\Queue\Queue.c(87,18): warning C4133: “=”: 从“Queue *”到“QNode *”的类型不兼容
+  Queue.vcxproj -> D:\数据结构\Queue\Debug\Queue.exe

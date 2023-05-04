@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"Tree.h"
+#include"Queue.h"
 
 BTNode* BuyNode(BTDataType x)
 {
@@ -23,7 +24,11 @@ void PreOrder(BTNode* root)
 		return;
 	}
 
+	//用于整形数据的测试
 	printf("%d ", root->data);
+
+	////用于字符型数据的测试
+	//printf("%c ", root->data);
 	PreOrder(root->left);
 	PreOrder(root->right);
 }
@@ -111,4 +116,92 @@ BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
 		return ret2;
 
 	return NULL;
+}
+
+//需要单独拿出来测试，因为此时的BTDataType的类型需要是char
+BTNode* BinaryTreeCreate(BTDataType* str, int* pi)
+{
+	if (str[*pi] == '#')
+	{
+		(*pi)++;
+		return NULL;
+	}
+	
+	BTNode* root = BuyNode(str[(*pi)++]);
+	root->left = BinaryTreeCreate(str, pi);
+	root->right = BinaryTreeCreate(str, pi);
+	return root;
+}
+
+void BinaryTreeDestory(BTNode* root)
+{
+	if (root == NULL)
+		return;
+
+	BinaryTreeDestory(root->left);
+	BinaryTreeDestory(root->right);
+	free(root);
+}
+
+void LevelOrder(BTNode* root)
+{
+	Queue q;
+	QueueInit(&q);
+	if (root)
+	{
+		QueuePush(&q, root);
+	}
+
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		printf("%d ", front->data);
+		QueuePop(&q);
+		if (front->left)
+		{
+			QueuePush(&q, front->left);
+		}
+
+		if (front->right)
+		{
+			QueuePush(&q, front->right);
+		}
+	}
+	printf("\n");
+	QueueDestroy(&q);
+}
+
+bool BinaryTreeComplete(BTNode* root)
+{
+	Queue q;
+	QueueInit(&q);
+
+	if (root)
+	{
+		QueuePush(&q, root);
+	}
+
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+		if (front)
+		{
+			QueuePush(&q, front->left);
+			QueuePush(&q, front->right);
+		}
+		else
+		{
+			break;
+		}
+	}
+	while (!QueueEmpty(&q))
+	{
+		BTNode* Front = QueueFront(&q);
+		QueuePop(&q);
+		if (Front)
+			return false;
+	}
+	QueueDestroy(&q);
+	return true;
 }

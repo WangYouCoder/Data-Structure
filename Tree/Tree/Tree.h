@@ -4,7 +4,9 @@
 #include<stdlib.h>
 #include<stdbool.h>
 
-typedef int BTDataType;
+
+
+typedef char BTDataType;
 typedef struct BinaryTreeNode
 {
 	BTDataType data;
@@ -24,9 +26,6 @@ void InOrder(BTNode* root);
 // 二叉树后序遍历
 void PostOrder(BTNode* root);
 
-// 层序遍历
-void LevelOrder(BTNode* root);
-
 // 二叉树节点个数
 int BinaryTreeSize(BTNode* root);
 
@@ -40,10 +39,13 @@ int BinaryTreeLevelKSize(BTNode* root, int k);
 BTNode* BinaryTreeFind(BTNode* root, BTDataType x);
 
 // 通过前序遍历的数组"ABD##E#H##CF##G##"构建二叉树
-BTNode* BinaryTreeCreate(BTDataType* a, int n, int* pi);
+BTNode* BinaryTreeCreate(BTDataType* str,int* pi);
 
 // 二叉树销毁
-void BinaryTreeDestory(BTNode** root);
+void BinaryTreeDestory(BTNode* root);
+
+// 层序遍历
+void LevelOrder(BTNode* root);
 
 // 判断二叉树是否是完全二叉树
-int BinaryTreeComplete(BTNode* root);
+bool BinaryTreeComplete(BTNode* root);

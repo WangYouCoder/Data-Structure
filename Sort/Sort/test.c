@@ -97,7 +97,8 @@ void TestBubbleSort()
 void TestQuickSort()
 {
 	int a[] = { 5,2,9,4,3,8,6,1,7,0 };
-	QuickSort(a, 0, sizeof(a) / sizeof(int) - 1);
+	//QuickSort(a, 0, sizeof(a) / sizeof(int) - 1);
+	QuickSortNonR(a, 0, sizeof(a) / sizeof(int) - 1);
 	PrintArr(a, sizeof(a) / sizeof(int));
 }
 int main()
@@ -107,8 +108,8 @@ int main()
 
 	//TestInsertSort();
 	//TestShellSort();
-	TestSelectSort();
+	//TestSelectSort();
 	//TestBubbleSort();
-	//TestQuickSort();
+	TestQuickSort();
 	return 0;
 }

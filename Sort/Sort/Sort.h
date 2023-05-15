@@ -24,3 +24,7 @@ void BubbleSort(int* a, int n);
 //快速排序
 void QuickSort(int* a, int left, int right);
 
+//非递归快排
+void QuickSortNonR(int* a, int left, int right);
+
+

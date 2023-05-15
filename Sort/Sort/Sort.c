@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"Sort.h"
+#include"Stack.h"
 
 void PrintArr(int* a, int n)
 {
@@ -272,6 +273,7 @@ int Partion1(int* a, int left, int right)
 	return left;
 }
 
+//挖坑法
 int Partion2(int* a, int left, int right)
 {
 	int min = GetMidIndex(a, left, right);
@@ -303,13 +305,68 @@ int Partion2(int* a, int left, int right)
 	return pivot;
 }
 
+//前后指针
+int Partion3(int* a, int left, int right)
+{
+	int key = left;
+	int prev = left, cur = left + 1;
+	while (cur <= right)
+	{
+		if (a[key] > a[cur])
+		{
+			Swap(&a[cur], &a[++prev]);
+			cur++;
+		}
+		else
+		{
+			cur++;
+		}
+	}
+	Swap(&a[key], &a[prev]);
+	return prev;
+}
+
 //O(N*logN)
 void QuickSort(int* a, int left, int right)
 {
 	if (left >= right)
 		return;
 
-	int key = Partion1(a, left, right);
+	int key = Partion3(a, left, right);
 	QuickSort(a, left, key - 1);
 	QuickSort(a, key + 1, right);
+}
+
+void QuickSortNonR(int* a, int left, int right)
+{
+	Stack st;
+	StackInit(&st);
+	StackPush(&st, left);
+	StackPush(&st, right);
+
+	while (!StackEmpty(&st))
+	{
+		int end = StackTop(&st);
+		StackPop(&st);
+
+		int begin = StackTop(&st);
+		StackPop(&st);
+
+		int key = Partion3(a, begin, end);
+		//[begin,key - 1] key [key + 1,end]
+
+		if (begin < key - 1)
+		{
+			StackPush(&st, begin);
+			StackPush(&st, key - 1);
+		}
+
+		if (key + 1 < end)
+		{
+			StackPush(&st, key + 1);
+			StackPush(&st, end);
+		}
+	}
+
+	StackDestroy(&st);
 }
